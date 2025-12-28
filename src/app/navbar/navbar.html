@@ -1,0 +1,35 @@
+<nav class="fixed-top navbar navbar-expand-lg rounded-3 gray-400 bg-gradient mt-2">
+    <div class="container-fluid justify-content-between collapse navbar-collapse">
+        <a class="d-flex align-items-center gap-2 navbar-brand" routerLink="/">
+            <img src="assets/img/Logo.jpg" alt="" width="40"  class="d-inline-block align-text-top rounded-2">
+            Watches4All
+        </a>
+        <div class="justify-content-between">
+            <ul class="navbar-nav gap-4">
+                <li class="nav-item">
+                    <a id="prodsLink" class="nav-link" routerLink="/prods">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a id="aboutLink" class="nav-link" routerLink="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a id="contactLink" class="nav-link" routerLink="/contact">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div style="margin-right: 1rem; gap: 1.7rem ;" class="d-flex align-items-center">
+            <i *ngIf="isDark" role="button" (click)="toggleMode()" class="bi bi-brightness-low-fill fs-4"></i>
+            <i *ngIf="!isDark" role="button" (click)="toggleMode()" class="bi bi-moon-fill"></i>
+            <div role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="cart-icon-part">
+                <i class="bi bi-cart4 fs-4"></i>
+                <div id="small-cercle">
+                    <span>{{ CardServ.itemsNb }}</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</nav>
+
+
+<app-card></app-card>

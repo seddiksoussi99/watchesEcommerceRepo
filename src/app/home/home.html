@@ -1,0 +1,6 @@
+<div class="homeVideo">
+    <video (ended)="display(getStartedBtn)" class="rounded-3" autoplay [muted]="'muted'">
+        <source src="assets/vd/homeVd.mp4" type="video/mp4">
+    </video>
+</div>
+<a routerLink="/prods" #getStartedBtn id="getStartedBtn" class="btn btn-outline-dark">Get Started</a>

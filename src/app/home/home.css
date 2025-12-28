@@ -1,0 +1,24 @@
+.homeVideo{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    z-index: -1;
+}
+.homeVideo > video {
+    width: 100%;
+}
+
+#getStartedBtn{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transition: all .3s;
+    right: 8rem;
+    top: 52%;
+    width: 15rem;
+    height: 3rem;
+    box-shadow: white 0px 0px 7px 0px;
+    color: white;
+}

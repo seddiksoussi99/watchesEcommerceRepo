@@ -1,0 +1,48 @@
+
+<div class="d-flex justify-content-around">
+    <select #categoriesFilter (change)="filterByCategory(categoriesFilter)" id="categoriesFilterSelect" class="form-select" aria-label="Default select example">
+        <option selected [value]="0">All Categories</option>
+        <option *ngFor="let category of categories;" [value]="category.id">{{ category.name }}</option>
+    </select>
+    <div id="searchBlock">
+        <div (click)="filterByModel(searchInput)" class="btn btn-success">
+            <i class="bi bi-search"></i>
+        </div>
+        <div class="d-flex align-items-center w-100">
+            <input #searchInput class="form-control w-100" list="datalistOptions" id="exampleDataList" placeholder="Type to search by watch model...">
+            <button (click)="searchInput.value = '';" class="btn btn-outline-danger bi bi-x-lg" style="margin-left: -2.6rem;"></button>
+        </div>
+        
+        <datalist id="datalistOptions">
+            <option value="San Francisco">
+            <option value="New York">
+            <option value="Seattle">
+            <option value="Los Angeles">
+            <option value="Chicago">
+        </datalist>
+    </div>
+    
+</div>
+
+
+<div *ngIf="!isLoading" class="d-flex flex-wrap m-auto py-5 justify-content-center">
+    <div *ngIf="products.length == 0" class="alert alert-dark w-50" role="alert">
+        No Results!
+    </div>
+    <div *ngFor="let p of products" class="card m-2" style="width: 20%;">
+        <a [routerLink]="['/prods', p.id]" class="bg-light">
+            <img [src]="'http://localhost:5067/' + p.images[0]" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 role="button" [routerLink]="['/prods', p.id]" class="card-title">{{ p.name }}</h5>
+            <h6 class="card-text">{{ p.price }}$</h6>
+            <a [routerLink]="['/prods', p.id]" class="card-text"><span>More Details</span></a>
+        </div>
+    </div>
+</div>
+<div *ngIf="isLoading" class="w-100" style="text-align: center;">
+    <div class="spinner-grow" style="width: 3rem; height: 3rem; margin-top: 27vh;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+

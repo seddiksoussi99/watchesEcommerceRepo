@@ -1,0 +1,46 @@
+
+<div class="offcanvas offcanvas-end" style="width: 50%;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Your Cart <span class="text-muted">({{ cardSer.itemsNb }} items)</span></h5> 
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ng-container *ngIf="cardSer.itemsNb == 0 ;then emtyCardImg else cardContent;" ></ng-container>
+        <ng-template #emtyCardImg>
+            <img src="assets/img/emptyCart.png" class="img-fluid" alt="...">
+        </ng-template>
+        
+        <ng-template #cardContent>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Sub total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cardSer.items; let i = index;">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{ item.prodName }}</td>
+                        <td>{{ item.color }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ (item.quantity * item.price) }}</td>
+                        <td><i role="button" (click)="cardSer.RemoveItem(item.prodId, item.color)" class="bi bi-trash3 text-danger"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center mb-3"><b>Total : </b>${{ cardSer.GetTotal() }}</div>
+            <div class="w-100 text-center">
+                <a routerLink="/checkout" data-bs-dismiss="offcanvas" aria-label="Close" class="btn btn-success w-50">Commande</a>
+            </div>
+            
+        </ng-template>
+        
+    </div>
+</div>
