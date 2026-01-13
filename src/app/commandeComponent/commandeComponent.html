@@ -1,0 +1,70 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+
+  <!-- Jumbotron -->
+  <div class="container">
+    <div class="row g-0 align-items-center justify-content-center">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="margin-right: -35px;">
+        <div class="card cascading-right bg-body-tertiary" style="
+            backdrop-filter: blur(30px);
+            ">
+          <div class="card-body p-5 shadow-5 text-center">
+            <form #userF="ngForm" (ngSubmit)="sendCommande(userF)">
+                <h4 style="margin-bottom: 2.5rem;">User Informations</h4>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="fname" name="fname" placeholder="First Name" class="form-control" [ngModel]="customer.first_name" />
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="lname" name="lname" placeholder="Last Name" class="form-control" [ngModel]="customer.last_name" />
+              </div>
+              
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="tel" id="phone" name="phone" placeholder="Phone" class="form-control" [ngModel]="customer.phone" />
+              </div>
+              
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="city" name="city" placeholder="City" class="form-control" [ngModel]="customer.city" />
+              </div>
+              
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="address" name="address" placeholder="Address" class="form-control" [ngModel]="customer.address" />
+              </div>
+
+
+              <!-- Submit button -->
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-dark btn-block mb-4 w-50">
+                  Send Commande
+                </button>
+                <button type="reset" class="btn btn-outline-danger btn-block mb-4">
+                  Clear Inputs
+                </button>
+              </div>
+
+              <div *ngIf="!validForm" class="alert alert-danger d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle fs-4" style="margin-right: 1rem;"></i>
+                <div>
+                  Invalid data !!
+                </div>
+              </div>
+              
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <img src="assets/img/watchImg.jpg" class="w-100 rounded-4 shadow-4"
+          alt="" />
+      </div>
+    </div>
+
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+
+
