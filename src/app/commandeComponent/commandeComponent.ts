@@ -64,14 +64,16 @@ export class CommandeComponent {
     if(cartItems.length == 0) return;
     
     if(sessionStorage.getItem('customer') == JSON.stringify(customer)){
+      
       this.post_cmd(this.customerId, commandeDetails);
     }else{
+      
       sessionStorage.setItem('customer', JSON.stringify(customer));
       
       this.customerServ.addCustomer(customer).subscribe(
         res => {
           this.customerId = res.id;
-          sessionStorage.setItem('customerId', this.customerId.toString())
+          sessionStorage.setItem('customerId', this.customerId.toString());
           this.post_cmd(this.customerId, commandeDetails);
         },err => {
           console.log(err);
