@@ -4,5 +4,12 @@
 }
 
 .about-image {
-    width: 53%;
+    width: 56%;
+    margin-left: -8rem;
+    height: 83vh;
+    z-index: -1;
+}
+
+.about-image > img {
+    height: 100%;
 }
