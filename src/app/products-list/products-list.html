@@ -24,12 +24,17 @@
     
 </div>
 
+<div *ngIf="isLoading" class="w-100" style="text-align: center;">
+    <div class="spinner-grow" style="width: 3rem; height: 3rem; margin-top: 27vh;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 <div *ngIf="!isLoading" class="d-flex flex-wrap m-auto py-5 justify-content-center">
-    <div *ngIf="products.length == 0" class="alert alert-dark w-50" role="alert">
+    <div *ngIf="watchesList.watches.length == 0" class="alert alert-dark w-50" role="alert">
         No Results!
     </div>
-    <div *ngFor="let p of products" class="card m-2" style="width: 20%;">
+    <div *ngFor="let p of watchesList.watches" class="card m-2" style="width: 20%;">
         <a [routerLink]="['/prods', p.id]" class="bg-light">
             <img [src]="'http://localhost:5067/' + p.images[0]" class="card-img-top" alt="...">
         </a>
@@ -40,9 +45,30 @@
         </div>
     </div>
 </div>
-<div *ngIf="isLoading" class="w-100" style="text-align: center;">
-    <div class="spinner-grow" style="width: 3rem; height: 3rem; margin-top: 27vh;" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
-</div>
+
+<nav *ngIf="watchesList.numberOfPages > 1" aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a *ngIf="watchesList.previous" class="page-link" style="cursor: pointer;" (click)="paginatePage(watchesList.previous)" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+      <a *ngIf="!watchesList.previous" class="page-link disabled" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li *ngFor="let item of [].constructor(watchesList.numberOfPages); let i = index;" class="page-item cursor-pointer">
+        <a [ngClass]="{'active' : watchesList.currentPageNb == (i+1), 'page-link' : true} " (click)="paginatePage('', (i+1))" style="cursor: pointer;">{{i + 1}}</a>
+    </li>
+    <li class="page-item">
+      <a *ngIf="watchesList.next" (click)="paginatePage(watchesList.next)" class="page-link cursor-pointer" style="cursor: pointer;" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      <a *ngIf="!watchesList.next" class="page-link disabled" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
 

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { ProductService } from '../Services/product-service';
 import { Category } from '../models/category';
-import { Watch } from '../models/watch';
+import { WatchesList } from '../models/watches-list';
 
 @Component({
   selector: 'app-products-list',
@@ -12,9 +12,10 @@ import { Watch } from '../models/watch';
   styleUrl: './products-list.css'
 })
 export class ProductsList implements OnInit {
-  products! : Watch[];
+  watchesList! : WatchesList;
   categories! : Category[];
   isLoading : boolean = true;
+  
 
   constructor(private productService : ProductService, private router : Router){}
 
@@ -32,13 +33,12 @@ export class ProductsList implements OnInit {
     );
     this.productService.GetWatches().subscribe(
       res => {
-        this.products = res;
+        this.watchesList = res;
         this.isLoading = false;
       },
       err => {
         this.isLoading = true;
         console.log(err);
-        ;
       }
     )
   }
@@ -46,7 +46,7 @@ export class ProductsList implements OnInit {
   public filterByCategory(selectFilter : HTMLSelectElement){
     this.productService.filterItemsByCategoryId(parseInt(selectFilter.value)).subscribe(
       res => {
-        this.products = res;
+        this.watchesList = res;
         this.isLoading = false;
       },
       err => {
@@ -63,7 +63,7 @@ export class ProductsList implements OnInit {
     this.isLoading = true;
     this.productService.filterItemsByModel(pattern).subscribe(
       res => {
-        this.products = res;
+        this.watchesList = res;
         this.isLoading = false;
       },
       err => {
@@ -87,6 +87,25 @@ export class ProductsList implements OnInit {
     if(al?.classList.contains('active')){
       al?.classList.remove('active');
     }
+  }
+
+  public paginatePage(url : string = "", pageNb : number = 1){
+    this.isLoading = true;
+    if(url == ""){
+      url = '/Watches?pageNb='+pageNb;
+    }
+    this.productService.GetWatchesPaginated(url).subscribe(
+        res => {
+          this.watchesList = res;
+          this.isLoading = false;
+          
+        },
+        err => {
+          this.isLoading = true;
+          console.log(err);
+        }
+      );
+    
   }
 
 }

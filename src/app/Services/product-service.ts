@@ -3,6 +3,7 @@ import { Injectable, QueryList } from '@angular/core';
 import { Watch } from '../models/watch';
 import { Router } from '@angular/router';
 import { Category } from '../models/category';
+import { WatchesList } from '../models/watches-list';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class ProductService {
       params.categoryId = categoryId
     }
     
-    return this.http.get<Watch[]>(this.apiUrl + '/Watches', {params : params});
+    return this.http.get<WatchesList>(this.apiUrl + '/Watches', {params : params});
   }
 
   public filterItemsByModel(searchPattern : string) {
@@ -48,7 +49,7 @@ export class ProductService {
       params.searchPattern = searchPattern
     }
     
-    return this.http.get<Watch[]>(this.apiUrl + '/Watches', {params : params});
+    return this.http.get<WatchesList>(this.apiUrl + '/Watches', {params : params});
   }
 
   public toDetails(id : number){
@@ -56,6 +57,10 @@ export class ProductService {
   }
 
   public GetWatches() {
-    return this.http.get<Watch[]>(this.apiUrl + '/Watches');
+    return this.http.get<WatchesList>(this.apiUrl + '/Watches');
+  }
+  
+  public GetWatchesPaginated(url : string) {
+    return this.http.get<WatchesList>(this.apiUrl + url);
   }
 }
